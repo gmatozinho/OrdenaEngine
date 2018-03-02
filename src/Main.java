@@ -7,7 +7,7 @@ public class Main {
         int[] tenNumbersArray = CreateArray.GenerateNumbersArray(50);
         OrdenaEngine.bubbleSort(tenNumbersArray);
         //TODO CreateCSVFile
-        WorkWithCsvFile.writeLine(tenNumbersArray);
+        WorkWithCsvFile.write(tenNumbersArray);
 
     }
 }
