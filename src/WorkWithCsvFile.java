@@ -42,7 +42,7 @@ public class WorkWithCsvFile {
             int selectionExchange = 30;
             int quickSortExchange = 40;
 
-            writer.write(qtdResultados+separator + bubbleExchange +separator + insertionExchange + separator + selectionExchange + separator + quickSortExchange);
+            writer.write(i+separator + bubbleExchange +separator + insertionExchange + separator + selectionExchange + separator + quickSortExchange);
             writer.write("\n");
             writer.flush();
         }
