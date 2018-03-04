@@ -1,55 +1,34 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.rmi.server.ExportException;
+import java.util.Random;
 
 public class WorkWithCsvFile {
-    public static void writeLine(int[] array) throws IOException {
 
-        // writer
-        FileWriter writer = new FileWriter("output.csv");
 
-        // data
-        String appender = ";";
-        for(int arr: array ){
-            writer.write(appender + arr);
-            appender = ";";
-
-            writer.write("\n");
-            writer.flush();
+    public static FileWriter OpenFile() throws IOException {
+        try
+        {
+            return new FileWriter("benchmarkTable.csv");
+        }catch (Exception e)
+        {
+            return new FileWriter("benchmarkTable" + System.currentTimeMillis() +".csv");
         }
+
+    }
+
+    public static void CloseFile(FileWriter writer) throws IOException {
         writer.close();
     }
 
-    public static void write(int[] vectorInt) throws IOException {
+    public static void writeLine(FileWriter writer, String string) throws IOException {
+        writer.write(string);
+        writer.flush();
+    }
 
-        // writer
-        FileWriter writer = new FileWriter("benchmarkTable.csv");
-
-        String appender = "";
+    public static String writeResults(int[] results,int size){
         String separator = ",";
-        String header = "Qtd Numeros,Bubble,Insertion,Selection,QuickSort";
-        int qtdResultados = 100;
-
-        int[] vectorForBubble = vectorInt.clone();
-        int[] vectorForInsertion = vectorInt.clone();
-        int[] vectorForSelection = vectorInt.clone();
-        int[] vectorForQuickSort = vectorInt.clone();
-
-
-        writer.write(header +"\n");
-        for(int i=0;i <= qtdResultados;i++){
-            int bubbleExchange = 10;
-            int insertionExchange = 20;
-            int selectionExchange = 30;
-            int quickSortExchange = 40;
-
-            writer.write(i+separator + bubbleExchange +separator + insertionExchange + separator + selectionExchange + separator + quickSortExchange);
-            writer.write("\n");
-            writer.flush();
-        }
-        writer.close();
-
+        return size+separator + results[0] +separator + results[1] + separator + results[2] + separator + results[3] +"\n";
     }
-
-    
     
 }
