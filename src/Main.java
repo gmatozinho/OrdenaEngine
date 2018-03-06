@@ -16,7 +16,6 @@ public class Main {
         int qtdResultados = 100;
 
         for(int i=0;i <= qtdResultados;i++){
-
             int size = i*100;
             int[][] vectors = CreateArray.GenerateCloneArray(size);
             int[] results = SortEngine.OrdenaBenchmark(vectors);

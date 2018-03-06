@@ -61,43 +61,43 @@ public class SortEngine {
         return exchanges;
     }
 
-    private static int callQuickSort(int[] vector){
-        return quickSort(vector,0,vector.length-1,0);
-    }
-    
-    private static int quickSort(int[] vector, int start, int end, int exchanges){
-
-        if (start < end) {
-            int[] results = separetes(vector, start, end,exchanges);
-            int pivoPosition = results[0];
-            exchanges = results[0];
-            quickSort(vector, start, pivoPosition - 1,exchanges);
-            quickSort(vector, pivoPosition + 1, end,exchanges);
+    public static int quickSort(int v[])
+    {
+        if(0>v.length-1)
+        {
+            return 0;
         }
-
-        return exchanges;
+        return quickSort(v,0,v.length-1);
     }
-
-    private static int[] separetes(int[] vector, int start, int end, int exchanges) {
-        int pivo = vector[start];
-        int i = start + 1, f = end;
-        while (i <= f) {
-            if (vector[i] <= pivo)
-                i++;
-            else if (pivo < vector[f])
-                f--;
-            else {
-                int exchange = vector[i];
-                vector[i] = vector[f];
-                vector[f] = exchange;
-                i++;
-                f--;
-                exchanges++;
+    public static int quickSort(int v[], int start, int end) {
+        int count = 0;
+        int i = start;
+        int j = end;
+        int pivot = v[(i + j) / 2];
+        int change;
+        while (i <= j) {
+            while (v[i] < pivot) {
+                i = i + 1;
+            }
+            while (v[j] > pivot) {
+                j = j - 1;
+            }
+            if (i <= j) {
+                change = v[i];
+                v[i] = v[j];
+                v[j] = change;
+                i = i + 1;
+                j = j - 1;
+                count++;
             }
         }
-        vector[start] = vector[f];
-        vector[f] = pivo;
-        return new int[]{f, exchanges};
+        if (j > start)
+            quickSort(v, start, j);
+        if (i < end)
+            quickSort(v, i, end);
+
+        return count;
+
     }
 
     public static int[] OrdenaBenchmark(int[][] vectors)
@@ -107,8 +107,8 @@ public class SortEngine {
         int insertionExchange = SortEngine.insertionSort(vectors[1]);
         int selectionExchange = SortEngine.selectionSort(vectors[2]);
         //int quickSortExchange = OrdenaEngine.quickSort(vectors[3],0,size-1,0);
-        int quickSortExchange = SortEngine.callQuickSort(vectors[3]);
-
+        int quickSortExchange = SortEngine.quickSort(vectors[3]);
+        
         return new int[]{bubbleExchange,insertionExchange,selectionExchange,quickSortExchange};
 
     }
