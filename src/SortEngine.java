@@ -32,10 +32,10 @@ public class SortEngine {
             for (i = j - 1; (i >= 0) && (vector[i] > key); i--)
             {
                 vector[i + 1] = vector[i];
+                exchanges++;
             }
             vector[i + 1] = key;
 
-            exchanges++;
         }
 
         return exchanges;
@@ -106,7 +106,6 @@ public class SortEngine {
         int bubbleExchange = SortEngine.bubbleSort(vectors[0]);
         int insertionExchange = SortEngine.insertionSort(vectors[1]);
         int selectionExchange = SortEngine.selectionSort(vectors[2]);
-        //int quickSortExchange = OrdenaEngine.quickSort(vectors[3],0,size-1,0);
         int quickSortExchange = SortEngine.quickSort(vectors[3]);
         
         return new int[]{bubbleExchange,insertionExchange,selectionExchange,quickSortExchange};
